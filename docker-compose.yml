@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  owncloud:
+    image: owncloud:9.1-fpm
+    hostname: owncloud
+    volumes:
+    - owncloud-data:/var/www/html
+  nginx:
+    image: jim3mar/nginx-owncloud
+    links:
+    - owncloud
+    volumes:
+    - owncloud-data:/var/www/html
+    ports:
+    - 10080:80
+
+volumes:
+  owncloud-data:
+    driver: local
